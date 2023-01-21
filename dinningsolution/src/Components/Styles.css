@@ -1,4 +1,22 @@
-.dishCard{
-    display:"flex";
-    color:"red"
+.dishCard {
+  display: "flex";
+  color: "red";
+}
+
+.sidenav {
+  position: fixed;
+  display: inline-block;
+  text-align: center;
+  padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  top: 32%;
+  width: 3.5em;
+  box-sizing: border-box;
+  overflow: hidden;
+  justify-content: center;
+  z-index: 2;
+  /* border-radius: 0 5px 5px 0;
+    background-color:white;
+    box-shadow: rgb(10, 70, 77) 10px 5px 30px 5px; */
 }

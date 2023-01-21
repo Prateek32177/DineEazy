@@ -88,7 +88,7 @@ export default function FullWidthTabs() {
   };
 
   return (
-    <Box>
+    <Box sx={{marginBottom:"60px"}}>
       <StyledTabs
         value={value}
         onChange={handleChange}

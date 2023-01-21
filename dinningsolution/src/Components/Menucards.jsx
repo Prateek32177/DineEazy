@@ -6,7 +6,7 @@ import img1 from "../images/food.png";
 import img2 from "../images/hamburger.png";
 import img3 from "../images/pizza.png";
 import img4 from "../images/spaguetti.png";
-
+import QuantityCounter from "./Quantitybutton";
 import "./Styles.css";
 
 const menuCard=[
@@ -40,7 +40,7 @@ function Menucards() {
     backgroundColor: "#1E2026",
     padding: "20px",
     borderRadius: "20px",
-    margin: "20px",
+    margin: "20px 0px",
     boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
   };
   const imgStyle = { height: "50px", width: "50px", filter: "invert(100%)" };
@@ -63,9 +63,10 @@ setIcon("App-logo")
               <span style={{borderRadius:"5px",padding:"5px 15px", color: "white", fontSize: "15px",backgroundColor:"#7C40FF" }}>{item.itemPrice}</span>
 
             </div>
-            <IconButton className={icon} onClick={handleAdd}>
+            <QuantityCounter/>
+            {/* <IconButton className={icon} onClick={handleAdd}>
             <AddCircleOutlineOutlinedIcon  style={{ color: "7C40FF", height: 60, width: 60 }}/>
-            </IconButton>
+            </IconButton> */}
           </div>
         ))
     }
