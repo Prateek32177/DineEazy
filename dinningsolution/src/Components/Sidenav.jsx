@@ -5,10 +5,7 @@ import ShareLocationIcon from '@mui/icons-material/ShareLocation';
 import "./Styles.css"
 import {spiral} from "../SVG's/svg"
 
-
-
-function Sidenav() {
-  const iconStyle = {
+const iconStyle = {
     color: "white",
     width: "25px",
     height: "25px",
@@ -17,13 +14,11 @@ function Sidenav() {
     filter: "drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.4))"
   };
 
+
+function Sidenav() {
+  
   const [navbarLogo, setNavbarLogo] = useState("#61524f")
   
-  const [scrolled, setScrolled] = useState(0)
-
-  //navbar scroll changeBackground function
-  //logo scroll function
-
   const changeLogo = () => {
    
     if (window.scrollY >= 400) {
@@ -34,8 +29,6 @@ function Sidenav() {
   }
 
   useEffect(() => {
-    // changeLogo()
-    // adding the event when scroll change Logo
     window.addEventListener("scroll", changeLogo)
 
   })

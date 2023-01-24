@@ -8,6 +8,56 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Menucards from "./Menucards";
+import img1 from "../images/food.png";
+import img2 from "../images/hamburger.png";
+import img3 from "../images/pizza.png";
+import img4 from "../images/spaguetti.png";
+
+const menuCard = [
+  {
+    itemName: "Burger",
+    itemPrice: "299/-",
+    img: img1,
+  },
+  {
+    itemName: "Pizza",
+    itemPrice: "399/-",
+    img: img2,
+  },
+  {
+    itemName: "Chole Bhature",
+    itemPrice: "299/-",
+    img: img3,
+  },
+  {
+    itemName: "Pav Bhaji",
+    itemPrice: "199/-",
+    img: img4,
+  },
+];
+
+const tabDescp = [
+  {
+    label: "Starter",
+    MenuList: menuCard,
+  },
+  {
+    label: "Chinese",
+    MenuList: menuCard,
+  },
+  {
+    label: "Continential",
+    MenuList: menuCard,
+  },
+  {
+    label: "Main Course",
+    MenuList: menuCard,
+  },
+  {
+    label: "Beverages",
+    MenuList: menuCard,
+  },
+];
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -88,7 +138,7 @@ export default function FullWidthTabs() {
   };
 
   return (
-    <Box sx={{marginBottom:"60px"}}>
+    <Box sx={{ marginBottom: "60px" }}>
       <StyledTabs
         value={value}
         onChange={handleChange}
@@ -97,38 +147,20 @@ export default function FullWidthTabs() {
         //   variant="scrollable"
         aria-label="full width tabs example"
       >
-        <StyledTab label="Starter" {...a11yProps(0)} />
-        <StyledTab label="Chinese" {...a11yProps(1)} />
-        <StyledTab label="Continential" {...a11yProps(2)} />
-        <StyledTab label="Main Course" {...a11yProps(3)} />
-        <StyledTab label="Beverages" {...a11yProps(4)} />
+        {tabDescp.map((tab, index) => (
+          <StyledTab label={tab.label} {...a11yProps(index)} />
+        ))}
       </StyledTabs>
       <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <Menucards />
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          <Menucards />
-          <Menucards />
-          <Menucards />
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-        <Menucards />
-          <Menucards />
-          
-        </TabPanel>
-        <TabPanel value={value} index={3} dir={theme.direction}>
-        <Menucards />
-          <Menucards />
-          <Menucards />
-        </TabPanel>
-        <TabPanel value={value} index={4} dir={theme.direction}>
-          <Menucards />
-        </TabPanel>
+        {tabDescp.map((tab, index) => (
+          <TabPanel value={value} index={index} dir={theme.direction}>
+            <Menucards menuList={tab.MenuList} />
+          </TabPanel>
+        ))}
       </SwipeableViews>
     </Box>
   );

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-import IconButton from "@mui/material/IconButton";
 
-function QuantityCounter() {
+function QuantityCounter(props) {
+    const {usageArea, Quantity} = props
   const [count, setCount] = useState(0);
   // #7C40FF
   const handleDecrement = () => {
@@ -61,7 +60,6 @@ function QuantityCounter() {
         </button>
       )}
       {count == 0 ? (
-        // <AddCircleOutlineOutlinedIcon onClick={openCounter}  style={{ filter: "drop-shadow(2px 4px 6px black)",color: "7C40FF", height: 30, width: 30 }}/>
         <button
           onClick={openCounter}
           style={{ color: "white", fontSize: "1rem" }}

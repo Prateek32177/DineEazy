@@ -5,8 +5,8 @@ import { db } from "../Services/Firebase/FirebaseConfig";
 import { curve, spiral, logo } from "../SVG's/svg";
 import Sidenav from "./Sidenav";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import Logo from "./Logo"
-import Zoom from 'react-reveal/Zoom';
+import Logo from "./Logo";
+import Zoom from "react-reveal/Zoom";
 import { Navigate } from "react-router-dom";
 const iconStyle = {
   color: "grey",
@@ -48,36 +48,34 @@ function HeaderName() {
 
   // }
   const [rend, setRend] = useState("block");
-  const[menu,setMenu] = useState(false)
+  const [menu, setMenu] = useState(false);
   setTimeout(() => setRend("none"), 4000);
 
-
-  const handleMenu = ()=>{
-    setMenu(true)
-  }
+  const handleMenu = () => {
+    setMenu(true);
+  };
   return (
-    <div style={{backgroundColor:"#CAB6AF",height:"100vh"}}>
+    <div style={{ backgroundColor: "#CAB6AF", height: "100vh" }}>
       <Sidenav />
-      <Logo/>
-      {menu&&<Navigate to="/Menu" replace={true}  />}
+      <Logo />
+      {menu && <Navigate to="/Menu" replace={true} />}
       <div className="backgroundImg">
-      
         {curve}
         <Zoom left cascade duration={5000} delay={4000}>
-        <h1
-          style={{
-            filter: "drop-shadow(2px 4px 6px grey)",
-            padding: "30px",
-            fontSize: "5rem",
-          }}
-        >
-          {" "}
-          Hard Rock Cafe and Restaurant
-        </h1>
+          <h1
+            style={{
+              filter: "drop-shadow(2px 4px 6px grey)",
+              padding: "30px",
+              fontSize: "5rem",
+            }}
+          >
+            {" "}
+            Hard Rock Cafe and Restaurant
+          </h1>
         </Zoom>
         {curve}
         <button
-        onClick={handleMenu}
+          onClick={handleMenu}
           style={{
             borderColor: " #D1D9E6 !important",
             margin: "20px 0px",
