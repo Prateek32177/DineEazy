@@ -6,67 +6,85 @@ import IconButton from "@mui/material/IconButton";
 
 function QuantityCounter() {
   const [count, setCount] = useState(0);
-// #7C40FF
-  const handleDecrement = ()=> {
+  // #7C40FF
+  const handleDecrement = () => {
     let temp = count;
     if (count !== 0) {
-   
-      setCount(temp-1);
+      setCount(temp - 1);
     }
   };
 
-  const handleIncrement = () =>{
+  const handleIncrement = () => {
     let temp = count;
-    setCount(temp+1);
+    setCount(temp + 1);
   };
-  const openCounter = () =>{
+  const openCounter = () => {
     let temp = count;
     if (count == 0) {
-    setCount(temp+1);
-  };}
+      setCount(temp + 1);
+    }
+  };
 
   return (
     <div
       style={
-        count==0?
-      {
-    //     display: "flex",
-    //   justifyContent: "space-between",
-    //   alignItems: "center",
-    //   border: "0.2px solid grey",
-    //   borderRadius: "100px",
-    //   boxShadow: "black 3px 3px 6px 0px",
-      
-    }:{display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    border: "0.2px solid grey",
-    borderRadius: "100px",
-    boxShadow: "black 3px 3px 6px 0px",
-        backgroundColor:"transparent"
-    }}
+        count == 0
+          ? {
+              //     display: "flex",
+              //   justifyContent: "space-between",
+              //   alignItems: "center",
+              //   border: "0.2px solid grey",
+              //   borderRadius: "100px",
+              //   boxShadow: "black 3px 3px 6px 0px",
+            }
+          : {
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              border: "0.2px solid grey",
+              borderRadius: "100px",
+              boxShadow: "black 3px 3px 6px 0px",
+              backgroundColor: "transparent",
+            }
+      }
     >
-      {count!=0&&<button
-        onClick={handleDecrement}
-        style={{ borderRadius: "100px", margin: "0.7rem", padding: "0px 12px" }}
-      >
-        <RemoveIcon />
-      </button>}
-     { count==0?
-
-            // <AddCircleOutlineOutlinedIcon onClick={openCounter}  style={{ filter: "drop-shadow(2px 4px 6px black)",color: "7C40FF", height: 30, width: 30 }}/>
-<button onClick={openCounter}  style={{ color: "white", fontSize: "1rem" }}>
-ADD
-      </button>
-            :<p style={{ color: "white", margin: "0.7rem", fontSize: "1.5rem" }}>
-{count}
-      </p>}
-     { count!=0&&<button
-        onClick={handleIncrement}
-        style={{ borderRadius: "100px", margin: "0.7rem", padding: "0px 12px" }}
-      >
-        <AddIcon />
-      </button>}
+      {count != 0 && (
+        <button
+          onClick={handleDecrement}
+          style={{
+            borderRadius: "100px",
+            margin: "0.7rem",
+            padding: "0px 12px",
+          }}
+        >
+          <RemoveIcon />
+        </button>
+      )}
+      {count == 0 ? (
+        // <AddCircleOutlineOutlinedIcon onClick={openCounter}  style={{ filter: "drop-shadow(2px 4px 6px black)",color: "7C40FF", height: 30, width: 30 }}/>
+        <button
+          onClick={openCounter}
+          style={{ color: "white", fontSize: "1rem" }}
+        >
+          ADD
+        </button>
+      ) : (
+        <p style={{ color: "white", margin: "0.7rem", fontSize: "1.5rem" }}>
+          {count}
+        </p>
+      )}
+      {count != 0 && (
+        <button
+          onClick={handleIncrement}
+          style={{
+            borderRadius: "100px",
+            margin: "0.7rem",
+            padding: "0px 12px",
+          }}
+        >
+          <AddIcon />
+        </button>
+      )}
     </div>
   );
 }

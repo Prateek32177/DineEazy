@@ -113,11 +113,17 @@ export default function FullWidthTabs() {
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <Menucards />
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
+          <Menucards />
           <Menucards />
         </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
+        <Menucards />
+          <Menucards />
+          
+        </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
+        <Menucards />
+          <Menucards />
           <Menucards />
         </TabPanel>
         <TabPanel value={value} index={4} dir={theme.direction}>
