@@ -20,18 +20,18 @@ export default function SearchBar(){
             display: "flex",
             border: "1px solid grey",
             alignItems: "center",
-            borderRadius: "10px",
+            borderRadius: "10px"
           }}
         >
           <SearchOutlinedIcon style={iconStyle} />
           <input
             style={{
               width: "100%",
-              backgroundColor: "transparent",
-              padding: "0px",
+              paddingLeft: "10px",
               margin: "0px",
               border: "none",
               borderRadius: "10px",
+              background: "rgba(255,255,255,0.9)"
             }}
             placeholder="Find Your Food here"
             type="text"

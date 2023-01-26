@@ -10,10 +10,10 @@ export default function BackButton(props){
         <>
          <div
           style={{
-            margin: "2rem 2rem",
+            padding: "2rem 2rem",
             display: "flex",
             alignItems: "center",
-            color: color?color:"#1E2026",
+            color: "white",
             alignSelf: "flex-start",
           }}
         >
@@ -24,7 +24,7 @@ export default function BackButton(props){
               width: "25px",
               height: "25px",
               marginRight: "2px",
-              color:"grey"
+              color:"white"
             }}
           />
           <h5 style={{ margin: 0, padding: 0 }}>{pageName}</h5>

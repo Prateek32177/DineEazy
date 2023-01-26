@@ -17,14 +17,14 @@ const iconStyle = {
 
 function Sidenav() {
   
-  const [navbarLogo, setNavbarLogo] = useState("#61524f")
+  const [navbarLogo, setNavbarLogo] = useState("white")
   
   const changeLogo = () => {
    
     if (window.scrollY >= 400) {
       setNavbarLogo("white")
     } else {
-      setNavbarLogo("#61524f")
+      setNavbarLogo("white")
     }
   }
 
@@ -37,9 +37,9 @@ function Sidenav() {
   return (
     <div className="sidenav">
         {spiral}
-      <InstagramIcon style={{...iconStyle,color:navbarLogo}} />
-      <FacebookIcon style={{...iconStyle,color:navbarLogo}} />
-      <ShareLocationIcon style={{...iconStyle,color:navbarLogo}} />
+      <a ><InstagramIcon style={{...iconStyle,color:navbarLogo}} /></a>
+      <a><FacebookIcon style={{...iconStyle,color:navbarLogo}} /></a>
+      <a><ShareLocationIcon style={{...iconStyle,color:navbarLogo}} /></a>
       {spiral}
     </div>
   );

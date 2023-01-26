@@ -59,7 +59,7 @@ function QuantityCounter(props) {
           <RemoveIcon />
         </button>
       )}
-      {count == 0 ? (
+      {count == 0 ? usageArea!=="addedIem"&&(
         <button
           onClick={openCounter}
           style={{ color: "white", fontSize: "1rem" }}

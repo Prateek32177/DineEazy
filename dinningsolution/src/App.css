@@ -2,7 +2,7 @@
   text-align: center;
 
 }
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100&family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&family=Roboto+Slab:wght@100&family=Rubik+Mono+One&display=swap');
 
 
 .App-header {
@@ -18,23 +18,22 @@ background-repeat: no-repeat no-repeat;
 background-position: center center;
 background-size: cover; */
 }
-.backgroundImg{
-  background-image:url("C:\Users\admin\Desktop\Webcafe\dinningsolution\src\images\Re.gif");
-
+.HerHeading{
+  /* background-image:url("C:\Users\admin\Desktop\Webcafe\dinningsolution\src\images\Re2.jpg");
+  background-position: 50% 10%;
   background-repeat: no-repeat;
-  background-size: 92vw 47vh;
-  /* filter: brightness(0.3);   */
-   
+  background-size:500px 500px;
+  filter: brightness(0.3);  
+    */
    display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font:100rem !important;
-  color: #61524f;
-  background-position: 50% 10%;
-  overflow:auto;
+  color: white;
   word-break: break-word;
   font-family: 'Rubik Mono One', sans-serif ;
+  margin:0 5vw
 }
 
 .App-link {
@@ -128,4 +127,25 @@ button{
 #h51 {
   font-size: small;
   letter-spacing: 3px;
+}
+
+.HeroImage img{
+  /* width:350px;
+  height:500px; */
+  width:70vw;
+min-height:40vh;
+padding:20px;
+  border-radius:20px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+.HeroImage{
+  /* width:100vw;
+  height:100vh; */
+  /* overflow:hidden */
+}
+
+p{
+  font-family: 'Josefin Sans', sans-serif;
+  letter-spacing:5px;
+  margin-bottom:5px;
 }

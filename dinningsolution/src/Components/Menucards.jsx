@@ -6,28 +6,6 @@ import img2 from "../images/hamburger.png";
 import img3 from "../images/pizza.png";
 import img4 from "../images/spaguetti.png";
 
-const menuCard=[
-  {
-      itemName:"Burger",
-      itemPrice:"299/-",
-      img:img1
-  },
-  {
-      itemName:"Pizza",
-      itemPrice:"399/-",
-      img:img2
-  },
-  {
-      itemName:"Chole Bhature",
-      itemPrice:"299/-",
-      img:img3
-  },
-  {
-      itemName:"Pav Bhaji",
-      itemPrice:"199/-",
-      img:img4
-  }
-]
 
 const cardStyle = {
   display: "flex",
@@ -44,7 +22,6 @@ const cardStyle = {
 const imgStyle = { height: "50px", width: "50px", filter: "invert(100%)" };
 
 function Menucards(props) {
-console.log("menuList",props.menuList)
   const {menuList} = props
 
   return (

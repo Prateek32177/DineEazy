@@ -9,7 +9,7 @@ function Logo(){
         <div style={{  }}>{logo}</div>
 
         <div style={{ }}>
-          <h2 style={{fontSize:"2rem",fontWeight:"bold",    letterSpacing:"4px",marginLeft: "5px",marginBottom:'0px'}}>DineEazy</h2>
+          <h2 style={{fontSize:"2rem",fontWeight:"bold", color:"white",   letterSpacing:"4px",marginLeft: "5px",marginBottom:'0px'}}>DineEazy</h2>
         </div>
       </div>
     )

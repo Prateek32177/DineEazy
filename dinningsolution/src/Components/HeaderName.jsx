@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import "../App.css";
 import { db } from "../Services/Firebase/FirebaseConfig";
-import { curve, spiral, logo } from "../SVG's/svg";
-import Sidenav from "./Sidenav";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import Logo from "./Logo";
-import Zoom from "react-reveal/Zoom";
+import { curve } from "../SVG's/svg";
 import { Navigate } from "react-router-dom";
+import svg from "../SVG's/Dine.svg";
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+
 const iconStyle = {
   color: "grey",
   width: "25px",
@@ -19,6 +18,7 @@ const iconStyle = {
 function HeaderName() {
   const [name, setName] = useState("");
   const [input, setInput] = useState("");
+  const [menu, setMenu] = useState(false);
   //  function addToFirebase(e){
   //     console.log("checking...")
   //     try {
@@ -47,46 +47,41 @@ function HeaderName() {
   // }))
 
   // }
-  const [rend, setRend] = useState("block");
-  const [menu, setMenu] = useState(false);
-  setTimeout(() => setRend("none"), 4000);
+
+ 
 
   const handleMenu = () => {
     setMenu(true);
   };
   return (
-    <div style={{ backgroundColor: "#CAB6AF", height: "100vh" }}>
-      <Sidenav />
-      <Logo />
+    // <div style={{ backgroundColor: "#CAB6AF", height: "100vh" }}>
+
+    <div>
       {menu && <Navigate to="/Menu" replace={true} />}
-      <div className="backgroundImg">
-        {curve}
-        <Zoom left cascade duration={5000} delay={4000}>
-          <h1
-            style={{
-              filter: "drop-shadow(2px 4px 6px grey)",
-              padding: "30px",
-              fontSize: "5rem",
-            }}
-          >
-            {" "}
-            Hard Rock Cafe and Restaurant
-          </h1>
-        </Zoom>
-        {curve}
-        <button
-          onClick={handleMenu}
+
+      <div className="HeroImage">
+        <div
+          className="HerHeading"
           style={{
-            borderColor: " #D1D9E6 !important",
-            margin: "20px 0px",
-            fontSize: "1.5rem",
-            boxShadow:
-              "3px 3px 6px rgb(155 157 168), -3px -3px 6px rgb(218 218 218)",
+            textAlign: "left",
+            padding: "30px 50px",
           }}
         >
-          Menu
-        </button>
+          {curve}
+          <div>
+            <h4>Welcome to the</h4>
+            <h1> Hard Rock Cafe and Restaurant</h1>
+          </div>
+          {curve}
+          <img src={svg} alt="HeroImage"></img>
+        </div>
       </div>
+      <button
+        className="sidenavButton"
+        onClick={handleMenu}
+      >
+        Menu
+      </button>
     </div>
   );
 }
