@@ -144,7 +144,13 @@ padding:20px;
   /* overflow:hidden */
 }
 
-p{
+.Footer p,.billHeading{
+  font-family: 'Josefin Sans', sans-serif;
+  letter-spacing:5px;
+  margin-bottom:5px;
+}
+
+.BillDescp p{
   font-family: 'Josefin Sans', sans-serif;
   letter-spacing:5px;
   margin-bottom:5px;

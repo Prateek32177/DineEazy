@@ -18,7 +18,7 @@ const iconStyle = {
 function HeaderName() {
   const [name, setName] = useState("");
   const [input, setInput] = useState("");
-  const [menu, setMenu] = useState(false);
+
   //  function addToFirebase(e){
   //     console.log("checking...")
   //     try {
@@ -49,7 +49,7 @@ function HeaderName() {
   // }
 
  
-
+  const [menu, setMenu] = useState(false);
   const handleMenu = () => {
     setMenu(true);
   };
@@ -65,6 +65,7 @@ function HeaderName() {
           style={{
             textAlign: "left",
             padding: "30px 50px",
+            marginTop:"7rem"
           }}
         >
           {curve}

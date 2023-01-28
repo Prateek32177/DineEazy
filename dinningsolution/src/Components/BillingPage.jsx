@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import BackButton from "./BackButton";
 import menuBack from "../images/MenuBackground.png";
 import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
-
+import {useSelector} from "react-redux"
+import Confirmation from "./Modal"
 const iconStyle = {
   color: "white",
   width: "50px",
@@ -11,54 +12,31 @@ const iconStyle = {
   padding: "10px",
 };
 
-const billingItem = [
-  {
-    itemName: "Veg Biryani",
-    quantity: 1,
-    totalCost: 500,
-  },
-  {
-    itemName: "Fried Rice",
-    quantity: 2,
-    totalCost: 220,
-  },
-  {
-    itemName: "Masala Dosa",
-    quantity: 1,
-    totalCost: 150,
-  },
-  {
-    itemName: "Manchurian",
-    quantity: 3,
-    totalCost: 450,
-  },
-  {
-    itemName: "Grilled Sandwich",
-    quantity: 1,
-    totalCost: 300,
-  },
-  {
-    itemName: "Chilli Paneer",
-    quantity: 5,
-    totalCost: 700,
-  },
-];
+
 
 export default function BillingPage() {
+
+    const billingItem = useSelector((state)=>state.Counter.addedItems)
   let subTotal = 0;
   let total = 0;
   let gst = 0;
 let date = new Date()
   for (let i = 0; i < billingItem.length; i++) {
-    subTotal += billingItem[i].totalCost * billingItem[i].quantity;
+    subTotal += billingItem[i].itemPrice * billingItem[i].quantity;
   }
 
   gst = (subTotal * 5) / 100;
 
   total = subTotal + 2 * gst;
+
+const [succes,setSuccess] = useState(false)
+  const handlePay = ()=>{
+    setSuccess(true)
+  }
   return (
     <>
       <div
+      className="BillDescp"
         style={{
           backgroundImage: `url(${menuBack})`,
           paddingBottom: "30px",
@@ -69,7 +47,7 @@ let date = new Date()
         <ReceiptLongOutlinedIcon style={iconStyle} />
         <p style={{ color: "white" }}>Thanks For Ordering with Us ! Hope You Liked Our Service</p>
       </div>
-      <p style={{ color: "white",padding:"10px" }}>~ Bill Description ~</p>
+      <p className="billHeading" style={{ color: "white",padding:"10px" }}>~ Bill Description ~</p>
       <div
         style={{
           minHeight: "60vh",
@@ -99,9 +77,9 @@ let date = new Date()
               <tr style={{ color: "grey" }}>
                 <td>{item.itemName}</td>
                 <td>
-                  {item.quantity} X {item.totalCost}
+                  {item.quantity} X {item.itemPrice}
                 </td>
-                <td>{item.quantity * item.totalCost} Rs.</td>
+                <td>{item.quantity * item.itemPrice} Rs.</td>
               </tr>
             );
           })}
@@ -128,7 +106,8 @@ let date = new Date()
         </table>
         
       </div>
-      <button className="sidenavButton">Pay  {total} /- Rs Here</button>
+      <button className="sidenavButton" onClick={handlePay}>Pay  {total} /- Rs Here</button>
+      {succes&&<Confirmation/>}
     </>
   );
 }

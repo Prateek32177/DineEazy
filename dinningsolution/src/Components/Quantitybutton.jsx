@@ -1,27 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { useSelector, useDispatch } from "react-redux";
+import { decrement, increment,add,addItemList,removeItem } from "../ReduxStateManagement/MenuSlice";
 
 function QuantityCounter(props) {
-    const {usageArea, Quantity} = props
-  const [count, setCount] = useState(0);
-  // #7C40FF
-  const handleDecrement = () => {
-    let temp = count;
-    if (count !== 0) {
-      setCount(temp - 1);
-    }
-  };
+  const addedItems = useSelector((state) => state.Counter.addedItems);
+
+  console.log("added Menu items",addedItems)
+  const dispatch = useDispatch();
+const {count,dishName,detail} = props;
+
+useEffect(()=>{
+
+dispatch(addItemList())
+},[count])
 
   const handleIncrement = () => {
-    let temp = count;
-    setCount(temp + 1);
+    dispatch(increment(dishName));
   };
+  const handleDecrement = () => {
+    if (count !== 0) 
+    dispatch(decrement(dishName));
+  };
+
   const openCounter = () => {
-    let temp = count;
-    if (count == 0) {
-      setCount(temp + 1);
-    }
+    dispatch(add(dishName))
   };
 
   return (
@@ -47,9 +51,9 @@ function QuantityCounter(props) {
             }
       }
     >
-      {count != 0 && (
+      {count !== 0 && (
         <button
-          onClick={handleDecrement}
+          onClick={() => handleDecrement()}
           style={{
             borderRadius: "100px",
             margin: "0.7rem",
@@ -59,9 +63,9 @@ function QuantityCounter(props) {
           <RemoveIcon />
         </button>
       )}
-      {count == 0 ? usageArea!=="addedIem"&&(
+      {count === 0 ? (
         <button
-          onClick={openCounter}
+          onClick={() => openCounter()}
           style={{ color: "white", fontSize: "1rem" }}
         >
           ADD
@@ -71,9 +75,9 @@ function QuantityCounter(props) {
           {count}
         </p>
       )}
-      {count != 0 && (
+      {count !== 0 && (
         <button
-          onClick={handleIncrement}
+          onClick={() => handleIncrement()}
           style={{
             borderRadius: "100px",
             margin: "0.7rem",

@@ -3,7 +3,7 @@ import QuantityCounter from "./Quantitybutton"
 
 export default function AddedItemCard(props){
 
-    const {itemName} = props
+    const {detail} = props
     return(
         <>
             <div
@@ -14,8 +14,8 @@ export default function AddedItemCard(props){
                   margin: "15px 0px",
                 }}
               >
-                <p>{itemName}</p>
-                <QuantityCounter />
+                <p>{detail.itemName}</p>
+                <QuantityCounter detail={detail} dishName={detail.itemName} count={detail.quantity}/>
               </div>
         
         </>

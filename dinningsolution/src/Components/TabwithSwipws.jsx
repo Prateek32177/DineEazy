@@ -12,8 +12,28 @@ import img1 from "../images/food.png";
 import img2 from "../images/hamburger.png";
 import img3 from "../images/pizza.png";
 import img4 from "../images/spaguetti.png";
-
+import {useSelector} from "react-redux"
 const menuCard = [
+  {
+    itemName: "Burger",
+    itemPrice: "299/-",
+    img: img1,
+  },
+  {
+    itemName: "Pizza",
+    itemPrice: "399/-",
+    img: img2,
+  },
+  {
+    itemName: "Chole Bhature",
+    itemPrice: "299/-",
+    img: img3,
+  },
+  {
+    itemName: "Pav Bhaji",
+    itemPrice: "199/-",
+    img: img4,
+  },
   {
     itemName: "Burger",
     itemPrice: "299/-",
@@ -71,7 +91,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 3, marginTop: "2rem" }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -97,6 +117,12 @@ const StyledTabs = styled((props) => (
     variant="scrollable"
     scrollButtons="auto"
     TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+    sx={{
+      position: "fixed",
+      width: "100vw",
+      zIndex: "3",
+      backgroundColor: "#1E2026",
+    }}
   />
 ))({
   "& .MuiTabs-indicator": {
@@ -129,6 +155,7 @@ export default function FullWidthTabs() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
+  const list = useSelector((state)=>state.Counter.menuList)
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -138,7 +165,7 @@ export default function FullWidthTabs() {
   };
 
   return (
-    <Box sx={{ marginBottom: "60px" }}>
+    <Box sx={{ marginBottom: "60px", marginTop: "18rem" }}>
       <StyledTabs
         value={value}
         onChange={handleChange}
@@ -158,7 +185,9 @@ export default function FullWidthTabs() {
       >
         {tabDescp.map((tab, index) => (
           <TabPanel value={value} index={index} dir={theme.direction}>
-            <Menucards menuList={tab.MenuList} />
+            {list.map((detail) => (
+              <Menucards detail={detail} />
+            ))}
           </TabPanel>
         ))}
       </SwipeableViews>

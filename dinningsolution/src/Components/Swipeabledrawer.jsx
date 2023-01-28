@@ -9,29 +9,8 @@ import { Navigate } from "react-router-dom";
 import { arrow } from "../SVG's/svg";
 import AddedItemCard from "./AddedItemCard"
 import "../App.css"
+import {useSelector} from "react-redux"
 
-const addedItemList=[
-    {
-        label:'Pizza',
-        Quantity:'2'
-    },
-    {
-        label:'Burger',
-        Quantity:'2'
-    },
-    {
-        label:'Fried Rice',
-        Quantity:'2'
-    },
-    {
-        label:'Chill Paneer',
-        Quantity:'2'
-    },
-    {
-        label:'Pasta Italiano',
-        Quantity:'2'
-    }
-]
 const cardStyle = {
   textAlign: "center",
   color: "white",
@@ -68,6 +47,7 @@ const Puller = styled(Box)(({ theme }) => ({
 
 function SwipeableEdgeDrawer(props) {
 
+    const addedList = useSelector((state)=>state.Counter.addedItems)
   const { window } = props;
   const [open, setOpen] = React.useState(false);
   const [nav, setNav] = useState(false);
@@ -138,7 +118,7 @@ function SwipeableEdgeDrawer(props) {
                   color: "white",
                   fontSize: "1rem",
                 }}
-                label="1 Item"
+                label={`${addedList.length} Item`}
               />
             </Box>
           </StyledBox>
@@ -155,12 +135,12 @@ function SwipeableEdgeDrawer(props) {
             <div style={cardStyle}>
               <p>ITEM(S) ADDED</p>
               <hr style={{opacity:'0.5',width:"70%"}}/>
-              {addedItemList.map(
+              {addedList.length>0?addedList.map(
                 (item)=>(
-                    <AddedItemCard itemName={item.label}/>
+                    <AddedItemCard detail={item}/>
                 )
-              )}
-              <button
+              ):"No Items Added"}
+              {addedList.length>0&&<button
                 onClick={handleConfirm}
                 style={{
                   backgroundColor: "#7C40FF",
@@ -169,7 +149,7 @@ function SwipeableEdgeDrawer(props) {
                 }}
               >
                 Confirm Order {arrow}
-              </button>
+              </button>}
             </div>
           </StyledBox>
         </SwipeableDrawer>

@@ -1,7 +1,8 @@
 import React from "react"
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import "../App.css"
-
+import {useDispatch} from "react-redux"
+import {searchItems} from "../ReduxStateManagement/MenuSlice"
 const iconStyle = {
     color: "#7C40FF",
     width: "25px",
@@ -10,7 +11,16 @@ const iconStyle = {
     padding: "10px",
   };
   
-export default function SearchBar(){
+export default function SearchBar(props){
+
+    const dispatch = useDispatch()
+ 
+    const {callback} = props
+
+    const handleSearch=(e)=>{
+        callback(e.target.value)
+dispatch(searchItems(e.target.value))
+    }
     return(
         <>
          <div className="App-header" >
@@ -35,6 +45,8 @@ export default function SearchBar(){
             }}
             placeholder="Find Your Food here"
             type="text"
+            onChange={handleSearch}
+            // value={inp}
           ></input>
         </div>
         </div>
