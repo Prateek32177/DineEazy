@@ -4,6 +4,17 @@ import Sidenav from "./Sidenav"
 import HeaderName from "./HeaderName"
 import Footer from "./Footer"
 import MenuIcon from '@mui/icons-material/Menu';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+
 
 const iconStyle = {
     color: "white",
@@ -32,11 +43,53 @@ export default function HomePage(){
       window.addEventListener("scroll", changeLogo)
   
     })
+
+    const [state, setState] = React.useState({
+        right: false,
+      });
+    
+      const toggleDrawer = (anchor, open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+          return;
+        }
+    
+        setState({ ...state, [anchor]: open });
+      };
+    
+      const list = (anchor) => (
+        <Box
+          sx={{ width:  '100vw',background:'transparent'}}
+          role="presentation"
+          onClick={toggleDrawer(anchor, false)}
+          onKeyDown={toggleDrawer(anchor, false)}
+        >
+          <List>
+            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      );
+    
     return (
         <>
         <div style={{position:"fixed",width:"100%",zIndex:3,backgroundColor:"#1E2026",top:0,display:"flex",justifyContent:"space-between",alignItems:"center",boxShadow:navbarShadow }}>
         <Logo/>
-        <MenuIcon style={iconStyle}/>
+        <MenuIcon onClick={toggleDrawer('right', true)} style={iconStyle}/>
+          {/* <Drawer
+            anchor={'right'}
+            open={state['right']}
+            onClose={toggleDrawer('right', false)}
+          >
+            {list('right')}
+          </Drawer> */}
         </div>
        
         <Sidenav/>
@@ -45,3 +98,4 @@ export default function HomePage(){
         </>
     )
 }
+

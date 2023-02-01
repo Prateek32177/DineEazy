@@ -92,7 +92,7 @@ const QontoStepIconRoot = styled("div")(({ theme, ownerState }) => ({
 
 function QontoStepIcon(props) {
   const { active, completed, className } = props;
-console.log("stepper class",active,completed)
+
   const icons = {
     1: <RestaurantIcon style={iconStyle}/>,
     2: <SoupKitchenIcon style={iconStyle} />,

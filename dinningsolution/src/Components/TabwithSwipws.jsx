@@ -8,76 +8,8 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Menucards from "./Menucards";
-import img1 from "../images/food.png";
-import img2 from "../images/hamburger.png";
-import img3 from "../images/pizza.png";
-import img4 from "../images/spaguetti.png";
-import {useSelector} from "react-redux"
-const menuCard = [
-  {
-    itemName: "Burger",
-    itemPrice: "299/-",
-    img: img1,
-  },
-  {
-    itemName: "Pizza",
-    itemPrice: "399/-",
-    img: img2,
-  },
-  {
-    itemName: "Chole Bhature",
-    itemPrice: "299/-",
-    img: img3,
-  },
-  {
-    itemName: "Pav Bhaji",
-    itemPrice: "199/-",
-    img: img4,
-  },
-  {
-    itemName: "Burger",
-    itemPrice: "299/-",
-    img: img1,
-  },
-  {
-    itemName: "Pizza",
-    itemPrice: "399/-",
-    img: img2,
-  },
-  {
-    itemName: "Chole Bhature",
-    itemPrice: "299/-",
-    img: img3,
-  },
-  {
-    itemName: "Pav Bhaji",
-    itemPrice: "199/-",
-    img: img4,
-  },
-];
-
-const tabDescp = [
-  {
-    label: "Starter",
-    MenuList: menuCard,
-  },
-  {
-    label: "Chinese",
-    MenuList: menuCard,
-  },
-  {
-    label: "Continential",
-    MenuList: menuCard,
-  },
-  {
-    label: "Main Course",
-    MenuList: menuCard,
-  },
-  {
-    label: "Beverages",
-    MenuList: menuCard,
-  },
-];
+import { useSelector } from "react-redux";
+import {tabDescp} from "../ReduxStateManagement/MenuSlice"
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -155,7 +87,7 @@ export default function FullWidthTabs() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
-  const list = useSelector((state)=>state.Counter.menuList)
+  const list = useSelector((state) => state.Counter.menuList);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -186,7 +118,7 @@ export default function FullWidthTabs() {
         {tabDescp.map((tab, index) => (
           <TabPanel value={value} index={index} dir={theme.direction}>
             {list.map((detail) => (
-              <Menucards detail={detail} />
+              tab.label===detail.category&&<Menucards detail={detail} />
             ))}
           </TabPanel>
         ))}

@@ -5,7 +5,7 @@ import { db } from "../Services/Firebase/FirebaseConfig";
 import { curve } from "../SVG's/svg";
 import { Navigate } from "react-router-dom";
 import svg from "../SVG's/Dine.svg";
-import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import {addToFirebase} from "../ReduxStateManagement/MenuSlice.js"
 
 const iconStyle = {
   color: "grey",
@@ -15,42 +15,15 @@ const iconStyle = {
   padding: "10px",
 };
 
+
 function HeaderName() {
   const [name, setName] = useState("");
   const [input, setInput] = useState("");
 
-  //  function addToFirebase(e){
-  //     console.log("checking...")
-  //     try {
-  //         const docRef =  addDoc(collection(db, "testing1"), {
-  //          restaurantName:input
-  //         });
-
-  //         console.log("Document written with ID: ", docRef.id);
-  //       } catch (e) {
-  //         console.error("Error adding document: ", e);
-  //       }
-
-  // }
-
-  // useEffect(()=>{
-  //   readfirebase();
-  // },[input])
-  // function handleChange(e){
-  //     setInput(e.target.value)
-  // }
-  //  function readfirebase(){  console.log("hello");
-  //   getDocs(collection(db, "testing1")).then((querySnapshot)=>
-  //   querySnapshot.forEach((doc) => {
-  //     setName(doc.data().restaurantName)
-  //   console.log("hello",`${doc.id} => ${doc.data().restaurantName}`);
-  // }))
-
-  // }
-
- 
+  
   const [menu, setMenu] = useState(false);
   const handleMenu = () => {
+    addToFirebase()
     setMenu(true);
   };
   return (

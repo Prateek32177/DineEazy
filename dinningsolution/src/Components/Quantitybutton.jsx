@@ -7,7 +7,7 @@ import { decrement, increment,add,addItemList,removeItem } from "../ReduxStateMa
 function QuantityCounter(props) {
   const addedItems = useSelector((state) => state.Counter.addedItems);
 
-  console.log("added Menu items",addedItems)
+  // console.log("added Menu items",addedItems)
   const dispatch = useDispatch();
 const {count,dishName,detail} = props;
 

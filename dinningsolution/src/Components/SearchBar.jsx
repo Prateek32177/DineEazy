@@ -46,6 +46,7 @@ dispatch(searchItems(e.target.value))
             placeholder="Find Your Food here"
             type="text"
             onChange={handleSearch}
+            onFocus={handleSearch}
             // value={inp}
           ></input>
         </div>

@@ -6,6 +6,21 @@ import SearchBar from "./SearchBar";
 import menuBack from "../images/MenuBackground.png"
 import SearchSection from "./SearchSection";
 
+
+//   useEffect(()=>{
+//     readfirebase();
+//   },[input])
+//   function handleChange(e){
+//       setInput(e.target.value)
+//   }
+//    function readfirebase(){  console.log("hello");
+//     getDocs(collection(db, "testing1")).then((querySnapshot)=>
+//     querySnapshot.forEach((doc) => {
+//       setName(doc.data().restaurantName)
+//     console.log("hello",`${doc.id} => ${doc.data().restaurantName}`);
+//   }))
+
+//   }
 export default function FoodMenu(){
 
     const [search,setSearch] = useState("")
