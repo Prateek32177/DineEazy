@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import BackButton from "./BackButton";
 import menuBack from "../images/MenuBackground.png";
 import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 import {useSelector} from "react-redux"
 import Confirmation from "./Modal"
+
 const iconStyle = {
   color: "white",
   width: "50px",
@@ -15,7 +16,7 @@ const iconStyle = {
 
 
 export default function BillingPage() {
-
+  const toggled = useSelector((state)=>state.Counter.themeToggle)
     const billingItem = useSelector((state)=>state.Counter.addedItems)
   let subTotal = 0;
   let total = 0;
@@ -33,6 +34,20 @@ const [succes,setSuccess] = useState(false)
   const handlePay = ()=>{
     setSuccess(true)
   }
+
+  const [navbarShadow, setNavbarShadow] = useState("");
+
+  const changeLogo = () => {
+    if (window.scrollY >= 20) {
+      setNavbarShadow("rgba(0, 0, 0, 0.45) 0px 25px 20px -20px");
+    } else {
+      setNavbarShadow("");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeLogo);
+  });
   return (
     <>
       <div
@@ -41,12 +56,15 @@ const [succes,setSuccess] = useState(false)
           backgroundImage: `url(${menuBack})`,
           paddingBottom: "30px",
           backgroundSize: "cover",
+          backgroundColor:"rgb(30, 32, 38)",
+          // boxShadow:navbarShadow,
         }}
       >
         <BackButton pageName={"Billing"} />
         <ReceiptLongOutlinedIcon style={iconStyle} />
         <p style={{ color: "white" }}>Thanks For Ordering with Us ! Hope You Liked Our Service</p>
       </div>
+      <div style={{}}>
       <p className="billHeading" style={{ color: "white",padding:"10px" }}>~ Bill Description ~</p>
       <div
         style={{
@@ -106,7 +124,10 @@ const [succes,setSuccess] = useState(false)
         </table>
         
       </div>
-      <button className="sidenavButton" onClick={handlePay}>Pay  {total} /- Rs Here</button>
+      </div>
+      <button 
+     className={toggled?"sidenavButton sidenavButtonOrange":"sidenavButton sidenavButtonViolet"}
+      onClick={handlePay}>Pay  {total} /- Rs Here</button>
       {succes&&<Confirmation/>}
     </>
   );

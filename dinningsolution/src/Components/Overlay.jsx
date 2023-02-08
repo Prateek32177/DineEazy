@@ -1,12 +1,12 @@
 import React,{useState,useEffect} from "react";
 import Flip from "react-reveal/Flip";
-import {logo1} from  "../SVG's/svg";
+import {logo1,logo1Orange} from  "../SVG's/svg";
 import "../App.css"
-
+import { useSelector } from "react-redux";
 export default function Overlay() {
 
     const [rend, setRend] = useState("block");
-
+    const toggled = useSelector((state)=>state.Counter.themeToggle)
     useEffect(()=>{
       setTimeout(() => setRend("none"), 4000);
     },[])
@@ -15,13 +15,12 @@ export default function Overlay() {
     <>
       <div id="overlay" style={{ display: `${rend}` }}>
         <div id="text">
-          {" "}
-          {logo1}{" "}
+          {toggled?logo1Orange:logo1}
           <Flip duration={2000} top cascade>
             <h2
               id="h21"
               style={{
-                color: "#7C40FF",
+                color: toggled?"#FF5F00":"#7C40FF",
                 letterSpacing: "3px",
                 fontWeight: "bolder",
               }}
@@ -30,7 +29,7 @@ export default function Overlay() {
             </h2>
           </Flip>
           <Flip duration={2000} top cascade>
-            <h5 id="h51" style={{ color: "#7C40FF", letterSpacing: "7px" }}>
+            <h5 id="h51" style={{ color: toggled?"#FF5F00":"#7C40FF", letterSpacing: "7px" }}>
               Experience The Fine Dinning
             </h5>
           </Flip>

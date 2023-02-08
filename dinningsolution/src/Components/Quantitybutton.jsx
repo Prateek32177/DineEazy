@@ -3,7 +3,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment,add,addItemList,removeItem } from "../ReduxStateManagement/MenuSlice";
-
+import "../App.css"
 function QuantityCounter(props) {
   const addedItems = useSelector((state) => state.Counter.addedItems);
 
@@ -30,6 +30,7 @@ dispatch(addItemList())
 
   return (
     <div
+    className="counterbutton"
       style={
         count == 0
           ? {
@@ -43,11 +44,11 @@ dispatch(addItemList())
           : {
               display: "flex",
               justifyContent: "space-between",
-              alignItems: "center",
-              border: "0.2px solid grey",
-              borderRadius: "100px",
-              boxShadow: "black 3px 3px 6px 0px",
-              backgroundColor: "transparent",
+              // alignItems: "center",
+              // border: "0.2px solid grey",
+              // borderRadius: "100px",
+              // boxShadow: "black 3px 3px 6px 0px",
+              // backgroundColor: "transparent",
             }
       }
     >
@@ -56,8 +57,8 @@ dispatch(addItemList())
           onClick={() => handleDecrement()}
           style={{
             borderRadius: "100px",
-            margin: "0.7rem",
-            padding: "0px 12px",
+            // margin: "0.7rem",
+            padding: "0px 6px",
           }}
         >
           <RemoveIcon />
@@ -66,7 +67,7 @@ dispatch(addItemList())
       {count === 0 ? (
         <button
           onClick={() => openCounter()}
-          style={{ color: "white", fontSize: "1rem" }}
+          style={{ color: "white", fontSize: "1rem"}}
         >
           ADD
         </button>
@@ -80,8 +81,8 @@ dispatch(addItemList())
           onClick={() => handleIncrement()}
           style={{
             borderRadius: "100px",
-            margin: "0.7rem",
-            padding: "0px 12px",
+            // margin: "0.7rem",
+            padding: "0px 6px",
           }}
         >
           <AddIcon />

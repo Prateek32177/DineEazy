@@ -1,101 +1,135 @@
-import React,{useEffect,useState} from "react"
-import Logo from "./Logo"
-import Sidenav from "./Sidenav"
-import HeaderName from "./HeaderName"
-import Footer from "./Footer"
-import MenuIcon from '@mui/icons-material/Menu';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-
-
+import React, { useEffect, useState } from "react";
+import Logo from "./Logo";
+import Sidenav from "./Sidenav";
+import HeaderName from "./HeaderName";
+import Footer from "./Footer";
+import MenuIcon from "@mui/icons-material/Menu";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
+import CustomizedSwitches from "./ToggleButton";
+import Contact from "./Contact";
+import About from "./AboutPage";
+import PrivacyPolicy from "./PrivacyPolicy";
 const iconStyle = {
-    color: "white",
-    width: "35px",
-    height: "35px",
-    alignItems: "center",
-    padding:"15px",
-    filter: "drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.4))",
-    cursor:'pointer'
+  color: "white",
+  width: "35px",
+  height: "35px",
+  alignItems: "center",
+  // padding:"15px",
+  filter: "drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.4))",
+  cursor: "pointer",
+};
+
+export default function HomePage() {
+  const [navbarShadow, setNavbarShadow] = useState("");
+const [showAbout,setShowAbout] = useState(false)
+  const changeLogo = () => {
+    if (window.scrollY >= 20) {
+      setNavbarShadow("rgba(0, 0, 0, 0.45) 0px 25px 20px -20px");
+    } else {
+      setNavbarShadow("");
+    }
   };
 
-export default function HomePage(){
+  const handleClick = ()=>{
+    setShowAbout(true)
+  }
+  useEffect(() => {
+    window.addEventListener("scroll", changeLogo);
+  });
 
-    const [navbarShadow, setNavbarShadow] = useState("")
-  
-    const changeLogo = () => {
-     
-      if (window.scrollY >= 20) {
-        setNavbarShadow("rgba(0, 0, 0, 0.45) 0px 25px 20px -20px")
-      } else {
-        setNavbarShadow("")
-      }
+
+  const [state, setState] = React.useState({
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
     }
-  
-    useEffect(() => {
-      window.addEventListener("scroll", changeLogo)
-  
-    })
 
-    const [state, setState] = React.useState({
-        right: false,
-      });
-    
-      const toggleDrawer = (anchor, open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-          return;
-        }
-    
-        setState({ ...state, [anchor]: open });
-      };
-    
-      const list = (anchor) => (
-        <Box
-          sx={{ width:  '100vw',background:'transparent'}}
-          role="presentation"
-          onClick={toggleDrawer(anchor, false)}
-          onKeyDown={toggleDrawer(anchor, false)}
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <Box
+      sx={{ width: "100vw", background: "red" }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
+  return (
+    <>
+          
+         
+      <div
+        style={{
+          position: "fixed",
+          width: "100%",
+          zIndex: 3,
+          backgroundColor: "#1E2026",
+          top: 0,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          boxShadow: navbarShadow,
+        }}
+      >
+        <Logo />
+   
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            padding: "2rem 2rem",
+          }}
         >
-          <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      );
-    
-    return (
-        <>
-        <div style={{position:"fixed",width:"100%",zIndex:3,backgroundColor:"#1E2026",top:0,display:"flex",justifyContent:"space-between",alignItems:"center",boxShadow:navbarShadow }}>
-        <Logo/>
-        <MenuIcon onClick={toggleDrawer('right', true)} style={iconStyle}/>
-          {/* <Drawer
+          <CustomizedSwitches />
+          <MenuIcon onClick={toggleDrawer("right", true)} style={iconStyle} />
+        </div>
+
+        <Drawer
             anchor={'right'}
             open={state['right']}
             onClose={toggleDrawer('right', false)}
+            style={{backgroundColor:"red"}}
           >
             {list('right')}
-          </Drawer> */}
-        </div>
-       
-        <Sidenav/>
-        <HeaderName/>
-        <Footer/>
-        </>
-    )
-}
+          </Drawer>
+      </div>
+  
+      <Sidenav />
 
+      {false?<HeaderName />:<PrivacyPolicy/>}
+
+      
+      <Footer />
+    </>
+  );
+}

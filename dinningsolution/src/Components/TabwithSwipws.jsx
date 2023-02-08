@@ -1,4 +1,4 @@
-import * as React from "react";
+import React,{useState,useEffect} from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
 import SwipeableViews from "react-swipeable-views";
@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Menucards from "./Menucards";
 import { useSelector } from "react-redux";
-import {tabDescp} from "../ReduxStateManagement/MenuSlice"
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,6 +46,7 @@ function a11yProps(index) {
 const StyledTabs = styled((props) => (
   <Tabs
     {...props}
+    // 
     variant="scrollable"
     scrollButtons="auto"
     TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
@@ -54,19 +55,18 @@ const StyledTabs = styled((props) => (
       width: "100vw",
       zIndex: "3",
       backgroundColor: "#1E2026",
+      "& .MuiTabs-indicator": {
+        display: "flex",
+        justifyContent: "center",
+        backgroundColor: props.toggled?"#FF5F00": "#7C40FF",
+      },
+      "& .MuiTabs-indicatorSpan": {
+        width: "100%",
+        backgroundColor:props.toggled?"#FF5F00": "#7C40FF",
+      },
     }}
   />
-))({
-  "& .MuiTabs-indicator": {
-    display: "flex",
-    justifyContent: "center",
-    backgroundColor: "#7C40FF",
-  },
-  "& .MuiTabs-indicatorSpan": {
-    width: "100%",
-    backgroundColor: "#7C40FF",
-  },
-});
+))();
 
 const StyledTab = styled((props) => <Tab {...props} />)(({ theme }) => ({
   textTransform: "none",
@@ -86,8 +86,23 @@ const StyledTab = styled((props) => <Tab {...props} />)(({ theme }) => ({
 export default function FullWidthTabs() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-
+  const toggled = useSelector((state)=>state.Counter.themeToggle)
   const list = useSelector((state) => state.Counter.menuList);
+  const tabDescp = useSelector((state)=>state.Counter.tabDescp)
+  const [navbarShadow, setNavbarShadow] = useState("");
+
+  const changeLogo = () => {
+    if (window.scrollY >= 20) {
+      setNavbarShadow("rgba(0, 0, 0, 0.35) 0px 5px 15px");
+    } else {
+      setNavbarShadow("");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeLogo);
+  });
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -99,16 +114,19 @@ export default function FullWidthTabs() {
   return (
     <Box sx={{ marginBottom: "60px", marginTop: "18rem" }}>
       <StyledTabs
+      toggled={toggled}
         value={value}
         onChange={handleChange}
         textColor="inherit"
         //   scrollButtons="auto"
         //   variant="scrollable"
+        style={{boxShadow: navbarShadow}} 
         aria-label="full width tabs example"
       >
         {tabDescp.map((tab, index) => (
           <StyledTab label={tab.label} {...a11yProps(index)} />
         ))}
+  
       </StyledTabs>
       <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
@@ -117,9 +135,9 @@ export default function FullWidthTabs() {
       >
         {tabDescp.map((tab, index) => (
           <TabPanel value={value} index={index} dir={theme.direction}>
-            {list.map((detail) => (
+            {list.length!==0?list.map((detail) => (
               tab.label===detail.category&&<Menucards detail={detail} />
-            ))}
+            )):<p className="billHeading" style={{color:"white",padding:"5rem"}} >"No Items Available"</p>}
           </TabPanel>
         ))}
       </SwipeableViews>

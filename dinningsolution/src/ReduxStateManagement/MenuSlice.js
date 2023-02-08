@@ -3,79 +3,31 @@ import img1 from "../images/food.png";
 import img2 from "../images/hamburger.png";
 import img3 from "../images/pizza.png";
 import img4 from "../images/spaguetti.png";
-import { collection, addDoc, getDocs } from "firebase/firestore";
-import { db } from "../Services/Firebase/FirebaseConfig";
-
-const RestaurantDetails = {
-  name: "Hard Rock Cafe and Restaurant",
-  googleMapLink: "",
-  InstagramLink: "",
-  facebookLink: "",
-  contactNo: "",
-  Email: "",
-  foodType: "",
-};
-
- export function addToFirebase(e){
-      console.log("checking...")
-      try {
-          const docRef =  addDoc(collection(db, RestaurantDetails.name), {
-           FoodMenu:menuCard
-          });
-
-          console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-          console.error("Error adding document: ", e);
-        }
-
-  }
-
-  // useEffect(()=>{
-  //   readfirebase();
-  // },[input])
-  // function handleChange(e){
-  //     setInput(e.target.value)
-  // }
-
-  // const menuList = []
-  //  function readfirebase(){  console.log("hello");
-  //   getDocs(collection(db, "testing1")).then((querySnapshot)=>
-  //   querySnapshot.forEach((doc) => {
-  //     menuList=doc.data().FoodMenu
-  //   console.log("hello",`${doc.id} => ${doc.data().restaurantName}`);
-  // }))
-
-  // }
-
 
 export const tabDescp = [
-    {
-      label: "Starter",
-    },
-    {
-      label: "Chinese",
+  {
+    label: "Starter",
+  },
+  {
+    label: "Chinese",
+  },
+  {
+    label: "Continential",
+  },
+  {
+    label: "Main Course",
+  },
+  {
+    label: "Beverages",
+  },
+];
 
-    },
-    {
-      label: "Continential",
-  
-    },
-    {
-      label: "Main Course",
-
-    },
-    {
-      label: "Beverages",
-    }
-
-  ];
-  
-const menuCard = [
+let menuCard = [
   {
     itemName: "Burger",
     itemPrice: 299,
     img: img1,
-    type: "Veg",
+    type: 0,
     category: "Starter",
     quantity: 0,
     descp: "",
@@ -84,7 +36,7 @@ const menuCard = [
     itemName: "Burger2",
     itemPrice: 299,
     img: img1,
-    type: "Veg",
+    type: 0,
     category: "Starter",
     quantity: 0,
     descp: "",
@@ -93,7 +45,7 @@ const menuCard = [
     itemName: "Pizza",
     itemPrice: 399,
     img: img2,
-    type: "Veg",
+    type: 1,
     category: "Chinese",
     quantity: 0,
     descp: "",
@@ -102,7 +54,7 @@ const menuCard = [
     itemName: "Chole Bhature",
     itemPrice: 299,
     img: img3,
-    type: "Veg",
+    type: 0,
     category: "Continential",
     quantity: 0,
     descp: "",
@@ -111,43 +63,42 @@ const menuCard = [
     itemName: "Pav Bhaji",
     itemPrice: 199,
     img: img4,
-    type: "Veg",
+    type: 0,
     category: "Main Course",
     quantity: 0,
     descp: "",
   },
   {
-    itemName: "vada pav",
+    itemName: "Vada pav",
     itemPrice: 299,
     img: img1,
+    type: 1,
     label: "Beverages",
     category: "Main Course",
     quantity: 0,
     descp: "",
   },
   {
-    itemName: "lassi",
+    itemName: ":Lassi",
     itemPrice: 399,
     img: img2,
-    type: "Veg",
     category: "Main Course",
     quantity: 0,
     descp: "",
   },
   {
-    itemName: "icecream",
+    itemName: "Ice-Cream",
     itemPrice: 299,
     img: img3,
-    type: "Veg",
     category: "Starter",
     quantity: 0,
     descp: "",
   },
   {
-    itemName: "chole tikiya",
+    itemName: "Chole Tikiya",
     itemPrice: 199,
     img: img4,
-    type: "Veg",
+    type: 0,
     category: "Continential",
     quantity: 0,
     descp: "",
@@ -156,7 +107,6 @@ const menuCard = [
     itemName: "Mojito",
     itemPrice: 199,
     img: img4,
-    type: "Veg",
     category: "Beverages",
     quantity: 0,
     descp: "",
@@ -165,7 +115,7 @@ const menuCard = [
     itemName: "Maggi",
     itemPrice: 199,
     img: img4,
-    type: "Veg",
+    type: 1,
     category: "Continential",
     quantity: 0,
     descp: "",
@@ -174,7 +124,6 @@ const menuCard = [
     itemName: "Coco Cola",
     itemPrice: 199,
     img: img4,
-    type: "Veg",
     category: "Beverages",
     quantity: 0,
     descp: "",
@@ -183,7 +132,6 @@ const menuCard = [
     itemName: "Tea",
     itemPrice: 199,
     img: img4,
-    type: "Veg",
     category: "Beverages",
     quantity: 0,
     descp: "",
@@ -192,7 +140,7 @@ const menuCard = [
     itemName: "Veg Momos",
     itemPrice: 199,
     img: img4,
-    type: "Veg",
+    type: 1,
     category: "Starter",
     quantity: 0,
     descp: "",
@@ -201,7 +149,7 @@ const menuCard = [
     itemName: "Spring Roll",
     itemPrice: 199,
     img: img4,
-    type: "Veg",
+    type: 1,
     category: "Chinese",
     quantity: 0,
     descp: "",
@@ -210,7 +158,7 @@ const menuCard = [
     itemName: "Chilli Paneer",
     itemPrice: 199,
     img: img4,
-    type: "Veg",
+    type: 0,
     category: "Chinese",
     quantity: 0,
     descp: "",
@@ -219,7 +167,7 @@ const menuCard = [
     itemName: "Manchurian",
     itemPrice: 199,
     img: img4,
-    type: "Veg",
+    type: 1,
     category: "Chinese",
     quantity: 0,
     descp: "",
@@ -230,10 +178,12 @@ const initialState = {
   addedItems: [],
   menuList: menuCard,
   searchList: menuCard,
+  tabDescp:tabDescp,
+  themeToggle:false,
+  themeColor:"#7C40FF"
 };
 
 function replaceObjects(arr1, arr2, prop) {
-
   for (let i = 0; i < arr1.length; i++) {
     for (let j = 0; j < arr2.length; j++) {
       if (arr1[i][prop] === arr2[j][prop]) {
@@ -244,11 +194,17 @@ function replaceObjects(arr1, arr2, prop) {
   return arr1;
 }
 
-
 export const counterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
+    setMenuList: (state, action) => {
+      state.menuList = action.payload;
+      state.searchList = action.payload;
+    },
+    setTabDescp:(state,action)=>{
+        state.tabDescp = action.payload
+    },
     increment: (state, action) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
@@ -273,9 +229,9 @@ export const counterSlice = createSlice({
     },
     searchItems: (state, action) => {
       let filtered = state.menuList.filter((menu) =>
-        menu.itemName.toLowerCase().includes(action.payload)
+        menu.itemName.toLowerCase().includes(action.payload.toLowerCase())
       );
-      let result = replaceObjects(state.searchList, filtered, 'itemName');
+      let result = replaceObjects(state.searchList, filtered, "itemName");
 
       if (action.payload === "") {
         state.menuList = result;
@@ -283,11 +239,26 @@ export const counterSlice = createSlice({
         state.menuList = filtered;
       }
     },
+    toggle:(state,action)=>{
+ state.themeToggle = action.payload
+    },
+    toggleColor:(state,action)=>{
+      state.themeColor = action.payload
+         }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, add, addItemList, searchItems } =
-  counterSlice.actions;
+export const {
+  increment,
+  decrement,
+  add,
+  addItemList,
+  searchItems,
+  setMenuList,
+  setTabDescp,
+  toggle,
+  toggleColor
+} = counterSlice.actions;
 
 export default counterSlice.reducer;

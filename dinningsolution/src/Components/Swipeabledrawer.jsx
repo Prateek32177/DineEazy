@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Global } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
@@ -10,7 +10,8 @@ import { arrow } from "../SVG's/svg";
 import AddedItemCard from "./AddedItemCard"
 import "../App.css"
 import {useSelector} from "react-redux"
-
+import { collection, addDoc, getDoc, setDoc, doc } from "firebase/firestore";
+import { db } from "../Services/Firebase/FirebaseConfig";
 const cardStyle = {
   textAlign: "center",
   color: "white",
@@ -46,19 +47,51 @@ const Puller = styled(Box)(({ theme }) => ({
 }));
 
 function SwipeableEdgeDrawer(props) {
-
+  const toggled = useSelector((state)=>state.Counter.themeToggle)
     const addedList = useSelector((state)=>state.Counter.addedItems)
   const { window } = props;
+  console.log("wqindows",props)
   const [open, setOpen] = React.useState(false);
   const [nav, setNav] = useState(false);
+
+
+  const RestaurantDetails = collection(db, "Restaurants");
+  const docRef = doc(db, "Restaurants", "Hard Rock Cafe");
+  async function readfirebase(){  
+    const docSnap =  await getDoc(docRef);
+    if (docSnap.exists()) {
+      // console.log("Document data:", docSnap.data());
+      // setDetails(docSnap.data())
+      return docSnap.data()
+    
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+    }
+    
+    //   useEffect(()=>{
+    // readfirebase().then((data)=>setDetails(data));
+    
+    //   },[])
+
+  function addToFirebase(e) {
+    console.log("added items")
+    readfirebase().then((detail)=>setDoc(doc(RestaurantDetails, "Hard Rock Cafe"), {...detail,addedItemList:addedList})) ;
+  }
+
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
+  
   };
+
+
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const handleConfirm = () => {
     setNav(true);
+    addToFirebase()
   };
   return (
     <>
@@ -83,7 +116,7 @@ function SwipeableEdgeDrawer(props) {
           swipeAreaWidth={drawerBleeding}
           disableSwipeToOpen={false}
           ModalProps={{
-            keepMounted: true,
+            keepMounted: addedList.length>0?true:false,
           }}
        
         >
@@ -114,7 +147,7 @@ function SwipeableEdgeDrawer(props) {
               </p>
               <Chip
                 sx={{
-                  backgroundColor: "#7C40FF",
+                  backgroundColor: toggled?"#FF5F00":"#7C40FF",
                   color: "white",
                   fontSize: "1rem",
                 }}
@@ -143,7 +176,7 @@ function SwipeableEdgeDrawer(props) {
               {addedList.length>0&&<button
                 onClick={handleConfirm}
                 style={{
-                  backgroundColor: "#7C40FF",
+                  backgroundColor: toggled?"#FF5F00":"#7C40FF",
                   color: "white",
                   boxShadow: "rgb(0 0 0 / 35%) 0px 5px 15px",
                 }}

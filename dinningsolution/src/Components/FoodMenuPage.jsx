@@ -29,7 +29,7 @@ export default function FoodMenu(){
     )
     return(
         <> 
-        <div style={{backgroundImage:`url(${menuBack})`,paddingBottom:"30px",backgroundSize:"cover",top:0,left:0,right:0,position:'fixed',zIndex:3}}>
+        <div style={{backgroundImage:`url(${menuBack})`,backgroundColor:"rgb(30, 32, 38)",paddingBottom:"30px",backgroundSize:"cover",top:0,left:0,right:0,position:'fixed',zIndex:3}}>
         <BackButton pageName={"Food Menu"}/>
         <SearchBar callback={handleSearchInput}/>
         </div>

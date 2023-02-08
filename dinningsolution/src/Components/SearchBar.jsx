@@ -1,25 +1,26 @@
 import React from "react"
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import "../App.css"
-import {useDispatch} from "react-redux"
+import {useDispatch,useSelector} from "react-redux"
 import {searchItems} from "../ReduxStateManagement/MenuSlice"
-const iconStyle = {
-    color: "#7C40FF",
-    width: "25px",
-    height: "25px",
-    alignItems: "center",
-    padding: "10px",
-  };
-  
-export default function SearchBar(props){
 
+export default function SearchBar(props){
+  const toggled = useSelector((state)=>state.Counter.themeToggle)
     const dispatch = useDispatch()
  
     const {callback} = props
+    const iconStyle = {
+      color: toggled?"#FF5F00":"#7C40FF",
+      width: "25px",
+      height: "25px",
+      alignItems: "center",
+      padding: "10px",
+    };
+    
 
     const handleSearch=(e)=>{
         callback(e.target.value)
-dispatch(searchItems(e.target.value))
+      dispatch(searchItems(e.target.value))
     }
     return(
         <>
@@ -44,10 +45,8 @@ dispatch(searchItems(e.target.value))
               background: "rgba(255,255,255,0.9)"
             }}
             placeholder="Find Your Food here"
-            type="text"
+            type="search"
             onChange={handleSearch}
-            onFocus={handleSearch}
-            // value={inp}
           ></input>
         </div>
         </div>
