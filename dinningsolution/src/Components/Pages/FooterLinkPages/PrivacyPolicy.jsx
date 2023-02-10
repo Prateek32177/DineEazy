@@ -1,12 +1,15 @@
 import React from "react";
-import image from "../images/PrivacyPolicy.svg";
+import image from "../../../images/PrivacyPolicy.svg";
 import Fade from "react-reveal/Fade";
+import NavigateButton from "../../CommonComponent/NavigateButton";
 
-export default function PrivacyPolicy(props) {
+
+export default function PrivacyPolicy() {
+
   return (
     <>
       <div style={{ marginTop: "10rem" }}>
-        <Fade right cascade delay={4000} duration={2000}>
+        <Fade right cascade  duration={2000}>
           <p style={{ color: "white", fontSize: "x-large" }}>Privacy policy</p>
         </Fade>
 
@@ -18,7 +21,6 @@ export default function PrivacyPolicy(props) {
           ></img>
         </div>
 
-        <Fade right cascade delay={4000} duration={2000}>
           <p
             style={{
               color: "white",
@@ -70,8 +72,8 @@ export default function PrivacyPolicy(props) {
             questions or concerns about this Privacy Policy, please contact us
             at [insert contact information].
           </p>
-        </Fade>
       </div>
+      <NavigateButton path={"/"} additionalStyle={{padding:'0'}}/>
     </>
   );
 }

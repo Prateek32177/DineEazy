@@ -1,8 +1,13 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import {render,screen} from "@testing-library/react";
+import React from "react"
+import Logo from "./Components/Logo";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+
+describe("App Logo testing",()=>{
+
+it('rebders logo',()=>{
+  render(<Logo/>);
+  screen.debug();
+})
+
+})

@@ -1,5 +1,4 @@
 import React from "react";
-// import "../Styles/Confirmation.css";
 import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";

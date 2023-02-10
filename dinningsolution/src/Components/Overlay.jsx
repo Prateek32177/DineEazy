@@ -3,6 +3,7 @@ import Flip from "react-reveal/Flip";
 import {logo1,logo1Orange} from  "../SVG's/svg";
 import "../App.css"
 import { useSelector } from "react-redux";
+
 export default function Overlay() {
 
     const [rend, setRend] = useState("block");

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Logo from "./Logo";
-import Sidenav from "./Sidenav";
-import HeaderName from "./HeaderName";
-import Footer from "./Footer";
+import Logo from "../Logo";
+import Footer from "../Footer";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -14,10 +12,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import CustomizedSwitches from "./ToggleButton";
-import Contact from "./Contact";
-import About from "./AboutPage";
-import PrivacyPolicy from "./PrivacyPolicy";
+import CustomizedSwitches from "../ToggleButton";
+import { Outlet } from "react-router-dom";
+
 const iconStyle = {
   color: "white",
   width: "35px",
@@ -30,7 +27,7 @@ const iconStyle = {
 
 export default function HomePage() {
   const [navbarShadow, setNavbarShadow] = useState("");
-const [showAbout,setShowAbout] = useState(false)
+
   const changeLogo = () => {
     if (window.scrollY >= 20) {
       setNavbarShadow("rgba(0, 0, 0, 0.45) 0px 25px 20px -20px");
@@ -39,13 +36,9 @@ const [showAbout,setShowAbout] = useState(false)
     }
   };
 
-  const handleClick = ()=>{
-    setShowAbout(true)
-  }
   useEffect(() => {
     window.addEventListener("scroll", changeLogo);
   });
-
 
   const [state, setState] = React.useState({
     right: false,
@@ -64,7 +57,7 @@ const [showAbout,setShowAbout] = useState(false)
 
   const list = (anchor) => (
     <Box
-      sx={{ width: "100vw", background: "red" }}
+      sx={{ width: "100vw", background: "#1E2026" }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -86,8 +79,6 @@ const [showAbout,setShowAbout] = useState(false)
 
   return (
     <>
-          
-         
       <div
         style={{
           position: "fixed",
@@ -102,7 +93,7 @@ const [showAbout,setShowAbout] = useState(false)
         }}
       >
         <Logo />
-   
+
         <div
           style={{
             display: "flex",
@@ -114,21 +105,17 @@ const [showAbout,setShowAbout] = useState(false)
           <MenuIcon onClick={toggleDrawer("right", true)} style={iconStyle} />
         </div>
 
-        <Drawer
-            anchor={'right'}
-            open={state['right']}
-            onClose={toggleDrawer('right', false)}
-            style={{backgroundColor:"red"}}
-          >
-            {list('right')}
-          </Drawer>
+        {/* <Drawer
+          anchor={"right"}
+          open={state["right"]}
+          onClose={toggleDrawer("right", false)}
+          style={{ backgroundColor: "#1E2026" }}
+        >
+          {list("right")}
+        </Drawer> */}
       </div>
-  
-      <Sidenav />
+      <Outlet />
 
-      {false?<HeaderName />:<PrivacyPolicy/>}
-
-      
       <Footer />
     </>
   );

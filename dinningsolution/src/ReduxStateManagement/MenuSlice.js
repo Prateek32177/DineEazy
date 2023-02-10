@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import img1 from "../images/food.png";
-import img2 from "../images/hamburger.png";
-import img3 from "../images/pizza.png";
-import img4 from "../images/spaguetti.png";
-
+import img5 from "../images/BubbleTea.svg";
+import img2 from "../images/Cocktail.svg";
+import img3 from "../images/Coffee.svg";
+import img4 from "../images/Fries.svg";
+import img1 from "../images/Pizza.svg";
+import img6 from "../images/Pizza.svg";
+import img7 from "../images/Sandwich.svg";
 export const tabDescp = [
   {
     label: "Starter",
@@ -30,16 +32,16 @@ let menuCard = [
     type: 0,
     category: "Starter",
     quantity: 0,
-    descp: "",
+    descp: "Cheese Crispy Burger",
   },
   {
     itemName: "Burger2",
     itemPrice: 299,
-    img: img1,
+    img: img5,
     type: 0,
     category: "Starter",
     quantity: 0,
-    descp: "",
+    descp: "Only Burger",
   },
   {
     itemName: "Pizza",
@@ -48,7 +50,7 @@ let menuCard = [
     type: 1,
     category: "Chinese",
     quantity: 0,
-    descp: "",
+    descp: "Country Cheese Special Pizza",
   },
   {
     itemName: "Chole Bhature",
@@ -57,7 +59,7 @@ let menuCard = [
     type: 0,
     category: "Continential",
     quantity: 0,
-    descp: "",
+    descp: "Spicy Dish",
   },
   {
     itemName: "Pav Bhaji",
@@ -66,7 +68,7 @@ let menuCard = [
     type: 0,
     category: "Main Course",
     quantity: 0,
-    descp: "",
+    descp: "Spiciest",
   },
   {
     itemName: "Vada pav",
@@ -76,15 +78,15 @@ let menuCard = [
     label: "Beverages",
     category: "Main Course",
     quantity: 0,
-    descp: "",
+    descp: "Maharahtra's Most famous",
   },
   {
-    itemName: ":Lassi",
+    itemName: "Lassi",
     itemPrice: 399,
-    img: img2,
+    img: img6,
     category: "Main Course",
     quantity: 0,
-    descp: "",
+    descp: "Punjab Special lasi",
   },
   {
     itemName: "Ice-Cream",
@@ -92,7 +94,7 @@ let menuCard = [
     img: img3,
     category: "Starter",
     quantity: 0,
-    descp: "",
+    descp: "Top-Town Special Pistachio Ice cream",
   },
   {
     itemName: "Chole Tikiya",
@@ -101,15 +103,15 @@ let menuCard = [
     type: 0,
     category: "Continential",
     quantity: 0,
-    descp: "",
+    descp: "Street Side",
   },
   {
     itemName: "Mojito",
     itemPrice: 199,
-    img: img4,
+    img: img7,
     category: "Beverages",
     quantity: 0,
-    descp: "",
+    descp: "Refreshing Drink",
   },
   {
     itemName: "Maggi",
@@ -118,23 +120,23 @@ let menuCard = [
     type: 1,
     category: "Continential",
     quantity: 0,
-    descp: "",
+    descp: "Hill top Special",
   },
   {
-    itemName: "Coco Cola",
+    itemName: "Coca Cola",
     itemPrice: 199,
     img: img4,
     category: "Beverages",
     quantity: 0,
-    descp: "",
+    descp: "Infamous Coca Cola",
   },
   {
     itemName: "Tea",
     itemPrice: 199,
-    img: img4,
+    img: img6,
     category: "Beverages",
     quantity: 0,
-    descp: "",
+    descp: "No Description everyone Knows",
   },
   {
     itemName: "Veg Momos",
@@ -143,12 +145,12 @@ let menuCard = [
     type: 1,
     category: "Starter",
     quantity: 0,
-    descp: "",
+    descp: "Why Now Momos",
   },
   {
     itemName: "Spring Roll",
     itemPrice: 199,
-    img: img4,
+    img: img5,
     type: 1,
     category: "Chinese",
     quantity: 0,
@@ -157,16 +159,16 @@ let menuCard = [
   {
     itemName: "Chilli Paneer",
     itemPrice: 199,
-    img: img4,
+    img: img7,
     type: 0,
     category: "Chinese",
     quantity: 0,
-    descp: "",
+    descp: "Spiciest dish",
   },
   {
     itemName: "Manchurian",
     itemPrice: 199,
-    img: img4,
+    img: img6,
     type: 1,
     category: "Chinese",
     quantity: 0,
@@ -178,9 +180,10 @@ const initialState = {
   addedItems: [],
   menuList: menuCard,
   searchList: menuCard,
-  tabDescp:tabDescp,
-  themeToggle:false,
-  themeColor:"#7C40FF"
+  tabDescp: tabDescp,
+  themeToggle: false,
+  themeColor: "#7C40FF",
+  loader:true
 };
 
 function replaceObjects(arr1, arr2, prop) {
@@ -202,8 +205,8 @@ export const counterSlice = createSlice({
       state.menuList = action.payload;
       state.searchList = action.payload;
     },
-    setTabDescp:(state,action)=>{
-        state.tabDescp = action.payload
+    setTabDescp: (state, action) => {
+      state.tabDescp = action.payload;
     },
     increment: (state, action) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -238,13 +241,14 @@ export const counterSlice = createSlice({
       } else {
         state.menuList = filtered;
       }
+      state.loader = false
     },
-    toggle:(state,action)=>{
- state.themeToggle = action.payload
+    toggle: (state, action) => {
+      state.themeToggle = action.payload;
     },
-    toggleColor:(state,action)=>{
-      state.themeColor = action.payload
-         }
+    toggleColor: (state, action) => {
+      state.themeColor = action.payload;
+    },
   },
 });
 
@@ -258,7 +262,7 @@ export const {
   setMenuList,
   setTabDescp,
   toggle,
-  toggleColor
+  toggleColor,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

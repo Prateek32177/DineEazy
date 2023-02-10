@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Global } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
@@ -7,19 +7,13 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Chip from "@mui/material/Chip";
 import { Navigate } from "react-router-dom";
 import { arrow } from "../SVG's/svg";
-import AddedItemCard from "./AddedItemCard"
-import "../App.css"
-import {useSelector} from "react-redux"
-import { collection, addDoc, getDoc, setDoc, doc } from "firebase/firestore";
+import AddedItemCard from "./AddedItemCard";
+import "../App.css";
+import { useSelector } from "react-redux";
+import { collection, getDoc, setDoc, doc } from "firebase/firestore";
 import { db } from "../Services/Firebase/FirebaseConfig";
-const cardStyle = {
-  textAlign: "center",
-  color: "white",
-  backgroundColor: "#1E2026",
-  padding: "20px",
-  borderRadius: "20px",
-  boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
-};
+import { addedItemCardStyle } from "./StyleObject/Styles";
+import readfirebase from "../Services/Utility/reduxstates";
 
 const drawerBleeding = 65;
 
@@ -47,58 +41,40 @@ const Puller = styled(Box)(({ theme }) => ({
 }));
 
 function SwipeableEdgeDrawer(props) {
-  const toggled = useSelector((state)=>state.Counter.themeToggle)
-    const addedList = useSelector((state)=>state.Counter.addedItems)
+  const toggled = useSelector((state) => state.Counter.themeToggle);
+  const addedList = useSelector((state) => state.Counter.addedItems);
   const { window } = props;
-  console.log("wqindows",props)
+  console.log("wqindows", props);
   const [open, setOpen] = React.useState(false);
   const [nav, setNav] = useState(false);
 
-
   const RestaurantDetails = collection(db, "Restaurants");
-  const docRef = doc(db, "Restaurants", "Hard Rock Cafe");
-  async function readfirebase(){  
-    const docSnap =  await getDoc(docRef);
-    if (docSnap.exists()) {
-      // console.log("Document data:", docSnap.data());
-      // setDetails(docSnap.data())
-      return docSnap.data()
-    
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-    }
-    
-    //   useEffect(()=>{
-    // readfirebase().then((data)=>setDetails(data));
-    
-    //   },[])
 
   function addToFirebase(e) {
-    console.log("added items")
-    readfirebase().then((detail)=>setDoc(doc(RestaurantDetails, "Hard Rock Cafe"), {...detail,addedItemList:addedList})) ;
+    console.log("added items");
+    readfirebase().then((detail) =>
+      setDoc(doc(RestaurantDetails, "Hard Rock Cafe"), {
+        ...detail,
+        addedItemList: addedList,
+      })
+    );
   }
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
-  
   };
-
-
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const handleConfirm = () => {
     setNav(true);
-    addToFirebase()
+    addToFirebase();
   };
   return (
     <>
       <Root>
         {nav && <Navigate to="/orderConfirmed" replace={true} />}
         <Global
-       
           styles={{
             ".MuiDrawer-root > .MuiPaper-root": {
               height: `calc(50% - ${drawerBleeding}px)`,
@@ -116,9 +92,8 @@ function SwipeableEdgeDrawer(props) {
           swipeAreaWidth={drawerBleeding}
           disableSwipeToOpen={false}
           ModalProps={{
-            keepMounted: addedList.length>0?true:false,
+            keepMounted: addedList.length > 0 ? true : false,
           }}
-       
         >
           <StyledBox
             sx={{
@@ -147,7 +122,7 @@ function SwipeableEdgeDrawer(props) {
               </p>
               <Chip
                 sx={{
-                  backgroundColor: toggled?"#FF5F00":"#7C40FF",
+                  backgroundColor: toggled ? "#FF5F00" : "#7C40FF",
                   color: "white",
                   fontSize: "1rem",
                 }}
@@ -165,24 +140,24 @@ function SwipeableEdgeDrawer(props) {
               boxShadow: "rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset",
             }}
           >
-            <div style={cardStyle}>
+            <div style={addedItemCardStyle}>
               <p>ITEM(S) ADDED</p>
-              <hr style={{opacity:'0.5',width:"70%"}}/>
-              {addedList.length>0?addedList.map(
-                (item)=>(
-                    <AddedItemCard detail={item}/>
-                )
-              ):"No Items Added"}
-              {addedList.length>0&&<button
-                onClick={handleConfirm}
-                style={{
-                  backgroundColor: toggled?"#FF5F00":"#7C40FF",
-                  color: "white",
-                  boxShadow: "rgb(0 0 0 / 35%) 0px 5px 15px",
-                }}
-              >
-                Confirm Order {arrow}
-              </button>}
+              <hr style={{ opacity: "0.5", width: "70%" }} />
+              {addedList.length > 0
+                ? addedList.map((item) => <AddedItemCard detail={item} />)
+                : "No Items Added"}
+              {addedList.length > 0 && (
+                <button
+                  onClick={handleConfirm}
+                  style={{
+                    backgroundColor: toggled ? "#FF5F00" : "#7C40FF",
+                    color: "white",
+                    boxShadow: "rgb(0 0 0 / 35%) 0px 5px 15px",
+                  }}
+                >
+                  Confirm Order {arrow}
+                </button>
+              )}
             </div>
           </StyledBox>
         </SwipeableDrawer>

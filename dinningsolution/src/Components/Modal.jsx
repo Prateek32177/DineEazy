@@ -1,20 +1,8 @@
 import  React,{useState} from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Confirmation from './PaidSuccesfully';
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  minWidth: 200,
-  bgcolor: 'background.paper',
-  borderRadius:"15px",
-  boxShadow: 24,
-  p: 4,
-};
+import { modalStyle } from './StyleObject/Styles';
 
 export default function BasicModal(props) {
    
@@ -37,7 +25,7 @@ export default function BasicModal(props) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={modalStyle}>
           <Confirmation/>
           {/* <Button onClick={handleConfirmOpen} variant="outlined">Confirm</Button> */}
         </Box>

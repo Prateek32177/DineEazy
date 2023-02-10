@@ -1,10 +1,10 @@
 import React,{useState} from "react"
-import BackButton from "./BackButton"
-import SwipeableEdgeDrawer from "./Swipeabledrawer"
-import FullWidthTabs from "./TabwithSwipws";
-import SearchBar from "./SearchBar";
-import menuBack from "../images/MenuBackground.png"
-import SearchSection from "./SearchSection";
+import BackButton from "../CommonComponent/BackButton"
+import SwipeableEdgeDrawer from "../Swipeabledrawer"
+import FullWidthTabs from "../TabwithSwipws";
+import SearchBar from "../SearchBar";
+import menuBack from "../../images/MenuBackground.png"
+import SearchSection from "../SearchSection";
 
 
 //   useEffect(()=>{

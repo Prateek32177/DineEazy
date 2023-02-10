@@ -3,20 +3,7 @@ import QuantityCounter from "./Quantitybutton";
 import { useSelector } from "react-redux";
 import "../App.css";
 import { pureVeg, nonVeg } from "../SVG's/svg";
-import img3 from "../images/pizza.png";
-
-const cardStyle = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  backgroundColor: "#1E2026",
-  padding: "20px",
-  borderRadius: "20px",
-  margin: "20px 0px",
-  boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
-};
-
-const imgStyle = { height: "60px", width: "60px", filter: "invert(100%)" };
+import { menuCardStyle, menuImgStyle } from "./StyleObject/Styles";
 
 function Menucards(props) {
   const { detail } = props;
@@ -24,9 +11,9 @@ function Menucards(props) {
 
   return (
     <>
-      <div className="dishCard" style={cardStyle}>
+      <div className="dishCard" style={menuCardStyle}>
         <div className="dishImage">
-          <img src={img3} style={imgStyle} alt="dishimage"></img>
+          <img src={detail.img} style={menuImgStyle} alt="dishimage"></img>
         </div>
 
         <div style={{ marginLeft: "30px", textAlign: "left" }}>
@@ -56,7 +43,7 @@ function Menucards(props) {
                   marginRight: "10px",
                 }}
               >
-                {detail.itemName}
+                {detail.descp}
               </p>
           <div style={{ display: "flex",alignItems:"baseline",justifyContent:"space-between" }}>
             <span

@@ -1,17 +1,19 @@
 import React,{useEffect} from "react";
 import { Routes, Route} from "react-router-dom";
-import OrderConfirm from "./Components/OrderReceived.jsx";
-import HeaderName from "./Components/HeaderName";
+import OrderConfirm from "./Components/Pages/OrderReceived.jsx";
 import Overlay from "./Components/Overlay.jsx";
-import FoodMenu from "./Components/FoodMenuPage.jsx";
-import HomePage from "./Components/HomePage.jsx";
+import FoodMenu from "./Components/Pages/FoodMenuPage.jsx";
+import HomePage from "./Components/Pages/HomePage.jsx";
 import "./App.css";
-import BillingPage from "./Components/BillingPage.jsx";
+import BillingPage from "./Components/Pages/BillingPage.jsx";
 import {  doc, getDoc } from "firebase/firestore";
 import { db } from "./Services/Firebase/FirebaseConfig.js";
 import { useDispatch,useSelector } from "react-redux";
 import { setMenuList,setTabDescp } from "./ReduxStateManagement/MenuSlice.js";
-
+import Contact from "./Components/Pages/FooterLinkPages/Contact.jsx";
+import About from "./Components/Pages/FooterLinkPages/AboutPage.jsx";
+import PrivacyPolicy from "./Components/Pages/FooterLinkPages/PrivacyPolicy.jsx";
+import MainHome from "./Components/MainHome.jsx";
 function App() {
 
   const docRef = doc(db, "Restaurants", "Hard Rock Cafe");
@@ -31,6 +33,7 @@ if (docSnap.exists()) {
 }
 
 useEffect(()=>{
+  //uncomment below line when need data from database otherwise mockdata is enabled defaultly
   // readfirebase()
 },[])
   return (
@@ -38,7 +41,12 @@ useEffect(()=>{
       <div className="App">
       <Overlay/>
         <Routes>
-          <Route index path="/" element={<HomePage />}></Route>
+          <Route  path="/" element={<HomePage />}>
+          <Route index element={<MainHome/>}></Route>
+            <Route path="/about" element={<About/>}></Route>
+            <Route path="/contact" element={<Contact/>}></Route>
+            <Route path="/privacypolicy" element={<PrivacyPolicy/>}></Route>
+          </Route>
           <Route path="/Menu" element={<><FoodMenu /></>}></Route>
           <Route path="/orderConfirmed" element={<OrderConfirm />}></Route>
           <Route path="/Billing" element={<BillingPage/>}></Route>

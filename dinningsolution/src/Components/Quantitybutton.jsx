@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment,add,addItemList,removeItem } from "../ReduxStateManagement/MenuSlice";
+import {  useDispatch } from "react-redux";
+import { decrement, increment,add,addItemList } from "../ReduxStateManagement/MenuSlice";
 import "../App.css"
 function QuantityCounter(props) {
-  const addedItems = useSelector((state) => state.Counter.addedItems);
 
-  // console.log("added Menu items",addedItems)
   const dispatch = useDispatch();
-const {count,dishName,detail} = props;
+const {count,dishName} = props;
 
 useEffect(()=>{
-
 dispatch(addItemList())
 },[count])
 
@@ -33,14 +30,7 @@ dispatch(addItemList())
     className="counterbutton"
       style={
         count == 0
-          ? {
-              //     display: "flex",
-              //   justifyContent: "space-between",
-              //   alignItems: "center",
-              //   border: "0.2px solid grey",
-              //   borderRadius: "100px",
-              //   boxShadow: "black 3px 3px 6px 0px",
-            }
+          ? {}
           : {
               display: "flex",
               justifyContent: "space-between",
